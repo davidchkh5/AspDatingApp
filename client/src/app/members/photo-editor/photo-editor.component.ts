@@ -39,6 +39,7 @@ export class PhotoEditorComponent implements OnInit{
   }
 
   setMainPhoto(photo: Photo){
+    console.log("in photo setmain Id of photo id" + photo.id);
     this.membersService.setMainPhoto(photo.id).subscribe({
       next: () => {
         if(this.user && this.member){
@@ -55,6 +56,8 @@ export class PhotoEditorComponent implements OnInit{
   }
 
   deletePhoto(photoId: number){
+    var photos = this.member?.photos;
+    console.log(photos?.length);
     this.membersService.deletePhoto(photoId).subscribe({
       next: () => {
         if (this.member){
