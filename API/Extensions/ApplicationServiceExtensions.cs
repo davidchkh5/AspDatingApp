@@ -2,6 +2,7 @@ using API.Data;
 using API.Helpers;
 using API.Interfaces;
 using API.Services;
+using API.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
@@ -22,7 +23,10 @@ namespace API.Extensions
             services.AddScoped<IPhotoService,PhotoService>();
             services.AddScoped<LogUserActivity>();
             services.AddScoped<ILikesRepository,LikesRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>(); //the addscoped dies when http request has been completed
+            services.AddSignalR();
+            services.AddSingleton<PresenceTracker>(); //this method lives as long as application does
+
             return services;
 
         }
